@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "344313898434",
+    "project_id": "freelancing-fyp-cf954",
+    "storage_bucket": "freelancing-fyp-cf954.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344313898434:android:23770a1041b195bc97e25b",
+        "android_client_info": {
+          "package_name": "com.example.freelancing_fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344313898434-ubbb8pj6nl0v7o55s2j522ccgv6ovv84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACZ7IJWkhYI_1SHntvHpdpvgyYWwLK3Qk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344313898434-ubbb8pj6nl0v7o55s2j522ccgv6ovv84.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "344313898434-63et3h1jvbndnd7laud5kld646u59i6h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.freelancingFyp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
