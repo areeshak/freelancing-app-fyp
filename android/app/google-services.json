@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "344313898434-ubbb8pj6nl0v7o55s2j522ccgv6ovv84.apps.googleusercontent.com",
+          "client_id": "344313898434-jkmu4rf0kpnh2br6gfn4ierghjv4i11b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.freelancing_fyp",
+            "certificate_hash": "bbdd8e9a3df977a701dff4ecdb32d758576b744a"
+          }
+        },
+        {
+          "client_id": "344313898434-f6lbda20gdavjs43rqetoatumtn6k7k1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "344313898434-ubbb8pj6nl0v7o55s2j522ccgv6ovv84.apps.googleusercontent.com",
+              "client_id": "344313898434-f6lbda20gdavjs43rqetoatumtn6k7k1.apps.googleusercontent.com",
               "client_type": 3
             },
             {
