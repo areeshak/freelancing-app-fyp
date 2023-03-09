@@ -1,7 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancing_fyp/views/login.dart';
 import 'package:provider/provider.dart';
 
 import '../services/firebase_auth_methods.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_textfield.dart';
 
 class EmailPasswordSignup extends StatefulWidget {
   const EmailPasswordSignup({Key? key}) : super(key: key);
@@ -16,42 +20,62 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
 
   void signUpUser() async {
     context.read<FirebaseAuthMethods>().signUpWithEmail(
-      email: emailController.text,
-      password: passwordController.text,
-      context: context,
-    );
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Sign Up",
-            style: TextStyle(fontSize: 30),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+          SizedBox(height: 100,),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              controller: emailController,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              controller: passwordController,
-            ),
-          ),
-          const SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: signUpUser,
+            padding: const EdgeInsets.all(18.0),
             child: const Text(
-              "Sign Up",
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              'Sign up',
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(controller: emailController, labelText: 'Email'),
+          CustomTextField(
+            controller: passwordController,
+            labelText: 'Password',
+            obscureText: true,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          CustomButton(onTap: signUpUser, text: 'Sign up'),
+          const SizedBox(
+            height: 40,
+          ),
+          RichText(
+            text: TextSpan(
+              text: "Already have an account? ",
+              style: const TextStyle(fontSize: 16, color: Colors.black),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'Login',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                          const LoginScreen(),
+                        ),
+                      );
+                    },
+                ),
+              ],
             ),
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancing_fyp/views/login.dart';
+import 'package:freelancing_fyp/views/splash.dart';
 import 'package:freelancing_fyp/views/userProfile.dart';
 import 'package:provider/provider.dart';
 
@@ -38,22 +39,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const AuthWrapper(),
+        home: const SplashScreen(),
       ),
     );
   }
 }
 
-class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User?>();
-    if (firebaseUser != null) {
-      return const UserProfileScreen();
-    }
-    return const LoginScreen();
-  }
-}
 

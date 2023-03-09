@@ -1,9 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancing_fyp/services/firebase_auth_methods.dart';
 import 'package:freelancing_fyp/views/signup_email_password_screen.dart';
+import 'package:freelancing_fyp/widgets/custom_button.dart';
+import 'package:freelancing_fyp/widgets/custom_textfield.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'login_email_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,41 +16,140 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void loginUser() {
+    context.read<FirebaseAuthMethods>().loginWithEmail(
+        email: emailController.text,
+        password: passwordController.text,
+        context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => EmailPasswordSignup(),
+      backgroundColor: Colors.blueGrey.shade400,
+      body: Column(
+        children: [
+          const Expanded(
+            flex: 1,
+            child: Center(
+              child: Text(
+                'Hello',
+                style: TextStyle(
+                  fontSize: 60,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(18.0),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
-                );
-              },
-              child: const Text('Email Sign-up'),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => EmailPasswordLogin(),
+                  const SizedBox(
+                    height: 20,
                   ),
-                );
-              },
-              child: const Text('Email Login'),
+                  CustomTextField(
+                      controller: emailController, labelText: 'Email'),
+                  CustomTextField(
+                    controller: passwordController,
+                    labelText: 'Password',
+                    obscureText: true,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomButton(onTap: loginUser, text: 'Login'),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: "Don't have an account? ",
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Signup',
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const EmailPasswordSignup(),
+                                ),
+                              );
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  Row(
+                    children: const [
+                      Expanded(
+                          child: Divider(
+                        color: Colors.black38,
+                        thickness: 1,
+                      )),
+                      Text("   OR   "),
+                      Expanded(
+                          child: Divider(
+                        color: Colors.black38,
+                        thickness: 1,
+                      )),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  FloatingActionButton.extended(
+                    onPressed: () {
+                      context
+                          .read<FirebaseAuthMethods>()
+                          .signInWithGoogle(context);
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.google,
+                      color: Colors.red,
+                    ),
+                    label: const Text('Sign in with Google'),
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                  )
+                ],
+              ),
             ),
-            OutlinedButton(
-              onPressed: () {
-                context.read<FirebaseAuthMethods>().signInWithGoogle(context);
-              },
-              child: const Text('Google Sign-up'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
