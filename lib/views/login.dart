@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancing_fyp/services/firebase_auth_methods.dart';
 import 'package:freelancing_fyp/views/signup_email_password_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'login_email_password_screen.dart';
 
@@ -42,8 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             OutlinedButton(
               onPressed: () {
-                FirebaseAuthMethods(FirebaseAuth.instance)
-                    .signInWithGoogle(context);
+                context.read<FirebaseAuthMethods>().signInWithGoogle(context);
               },
               child: const Text('Google Sign-up'),
             ),

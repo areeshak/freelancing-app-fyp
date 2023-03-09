@@ -8,6 +8,11 @@ class FirebaseAuthMethods {
   final FirebaseAuth _auth;
   FirebaseAuthMethods(this._auth);
 
+  User get user => _auth.currentUser!;             //get user
+  
+  //state persistence
+  Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
+
 //email sign up
   Future<void> signUpWithEmail({
 //sign up with email function
@@ -57,6 +62,8 @@ class FirebaseAuthMethods {
 //FirebaseAuth auth = FirebaseAuth.instance;
       final GoogleSignIn googleSignIn = GoogleSignIn();
 
+      await googleSignIn.signOut();
+
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser != null) {
@@ -82,6 +89,26 @@ class FirebaseAuthMethods {
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
+    }
+  }
+
+//sign out
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!); // Displaying the error message
+    }
+  }
+
+  //delete account
+  Future<void> deleteAccount(BuildContext context) async {
+    try {
+      await _auth.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!); // Displaying the error message
+      // if an error of requires-recent-login is thrown, make sure to log
+      // in user again and then delete account.
     }
   }
 }

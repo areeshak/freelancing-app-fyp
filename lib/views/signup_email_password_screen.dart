@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../services/firebase_auth_methods.dart';
 
@@ -15,7 +15,7 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
   final TextEditingController passwordController = TextEditingController();
 
   void signUpUser() async {
-    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+    context.read<FirebaseAuthMethods>().signUpWithEmail(
       email: emailController.text,
       password: passwordController.text,
       context: context,
