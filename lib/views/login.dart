@@ -27,8 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void loginUser() {
     context.read<FirebaseAuthMethods>().loginWithEmail(
-        email: emailController.text,
-        password: passwordController.text,
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
         context: context);
   }
 
