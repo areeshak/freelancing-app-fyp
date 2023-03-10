@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.27,
               child: const Center(
                 child: Text(
                   'Hello',
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.73,
               // color: Colors.blueGrey.shade400,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       FontAwesomeIcons.google,
                       color: Colors.red,
                     ),
-                    label: const Text('Sign in with Google'),
+                    label: const Text('Continue with Google'),
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,
                   )
