@@ -7,7 +7,6 @@ import 'package:freelancing_fyp/widgets/custom_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -37,23 +36,24 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade400,
-      body: Column(
-        children: [
-          const Expanded(
-            flex: 1,
-            child: Center(
-              child: Text(
-                'Hello',
-                style: TextStyle(
-                  fontSize: 60,
-                  fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: const Center(
+                child: Text(
+                  'Hello',
+                  style: TextStyle(
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
+            Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              // color: Colors.blueGrey.shade400,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -148,8 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
