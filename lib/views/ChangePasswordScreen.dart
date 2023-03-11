@@ -17,8 +17,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final auth = FirebaseAuth.instance;
 
   void resetPassword() async {
-    auth.sendPasswordResetEmail(email: emailController.text.trim());
-    showSnackBar(context, 'Email sent!');
+    auth.sendPasswordResetEmail(email: emailController.text.trim()).then((value) {
+      showSnackBar(context, 'Email sent!');
+    }).onError((error, stackTrace) {
+      showSnackBar(context, error.toString());
+    });
+
   }
 
   @override

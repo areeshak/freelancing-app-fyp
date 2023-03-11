@@ -115,7 +115,7 @@ class FirebaseAuthMethods {
     try {
       await _auth.signOut();
      if(_auth.currentUser == null){
-       await  Navigator.of(context).push(
+       await  Navigator.of(context).pushReplacement(
          MaterialPageRoute(
            builder: (context) =>
            const LoginScreen(),
@@ -132,7 +132,7 @@ class FirebaseAuthMethods {
     try {
       await _auth.currentUser!.delete();
       if(_auth.currentUser == null){
-        await  Navigator.of(context).push(
+        await  Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) =>
             const LoginScreen(),
