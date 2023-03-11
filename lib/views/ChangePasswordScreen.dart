@@ -55,7 +55,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   Container(
                     padding: const EdgeInsets.all(18.0),
                     child: const Text(
-                      'Sign up',
+                      'Reset Password',
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.w500,
