@@ -23,7 +23,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     isVerified = FirebaseAuth.instance.currentUser!.emailVerified;
 
     if (!isVerified) {
-      context.read<FirebaseAuthMethods>().sendEmailVerification(context);
+     // context.read<FirebaseAuthMethods>().sendEmailVerification(context);
       timer = Timer.periodic(
         const Duration(seconds: 3),                                             //every 3 seconds it checks if user email is verfied
         (_) => checkEmailVerified(),

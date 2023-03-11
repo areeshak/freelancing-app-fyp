@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancing_fyp/utils/showSnackBar.dart';
+import 'package:freelancing_fyp/utils/showToastMessage.dart';
 
 import '../widgets/custom_button.dart';
 import '../widgets/custom_textfield.dart';
@@ -18,9 +18,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   void resetPassword() async {
     auth.sendPasswordResetEmail(email: emailController.text.trim()).then((value) {
-      showSnackBar(context, 'Email sent!');
+      showToastMessage('Email sent!');
     }).onError((error, stackTrace) {
-      showSnackBar(context, error.toString());
+      showToastMessage(error.toString());
     });
 
   }

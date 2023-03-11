@@ -4,7 +4,7 @@ import 'package:freelancing_fyp/views/login.dart';
 import 'package:freelancing_fyp/views/userProfile.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../utils/showSnackBar.dart';
+import '../utils/showToastMessage.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
@@ -32,7 +32,7 @@ class FirebaseAuthMethods {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!);
+      showToastMessage(e.message!);
     }
   }
 
@@ -40,9 +40,9 @@ class FirebaseAuthMethods {
   Future<void> sendEmailVerification(BuildContext context) async {
     try {
       _auth.currentUser!.sendEmailVerification();
-      showSnackBar(context, 'Email verification sent!');
+      showToastMessage('Email verification sent!');
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!);
+      showToastMessage(e.message!);
     }
   }
 
@@ -64,7 +64,7 @@ class FirebaseAuthMethods {
 // //use navigator to push to a page or provider to restrict user
 //       }
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!);
+      showToastMessage(e.message!);
     }
   }
 
@@ -106,7 +106,7 @@ class FirebaseAuthMethods {
         // }
       }
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!);
+      showToastMessage(e.message!);
     }
   }
 
@@ -123,7 +123,7 @@ class FirebaseAuthMethods {
        );
      }
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Displaying the error message
+      showToastMessage(e.message!); // Displaying the error message
     }
   }
 
@@ -140,7 +140,7 @@ class FirebaseAuthMethods {
         );
       }
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!); // Displaying the error message
+      showToastMessage(e.message!); // Displaying the error message
       // if an error of requires-recent-login is thrown, make sure to log
       // in user again and then delete account.
     }
