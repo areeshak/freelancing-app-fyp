@@ -67,15 +67,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   CustomTextField(
                       controller: emailController, labelText: 'Email'),
-
                   const SizedBox(
-                    height: 10,
+                    height: 25,
                   ),
-                  Align(alignment: Alignment.bottomRight,child: CustomButton(onTap: resetPassword, text: 'Reset Password')),
-                  const SizedBox(
-                    height: 20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomButton(
+                          onTap: resetPassword, text: 'Reset Password'),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
-
                 ],
               ),
             ),

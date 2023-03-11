@@ -88,14 +88,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 5,
                   ),
-                  GestureDetector(
-                    child: const Text('Forgot Password?'),
-                   onTap: () {Navigator.of(context).push(
-                     MaterialPageRoute(
-                       builder: (context) =>
-                       const ChangePasswordScreen(),
-                     ),
-                   );},
+                  Align(
+                      alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 35),
+                      child: GestureDetector(
+                        child: const Text('Forgot Password?'),
+                       onTap: () {Navigator.of(context).push(
+                         MaterialPageRoute(
+                           builder: (context) =>
+                           const ChangePasswordScreen(),
+                         ),
+                       );},
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
