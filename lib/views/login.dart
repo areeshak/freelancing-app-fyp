@@ -7,6 +7,8 @@ import 'package:freelancing_fyp/widgets/custom_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'ChangePasswordScreen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -82,6 +84,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                     labelText: 'Password',
                     obscureText: true,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  GestureDetector(
+                    child: const Text('Forgot Password?'),
+                   onTap: () {Navigator.of(context).push(
+                     MaterialPageRoute(
+                       builder: (context) =>
+                       const ChangePasswordScreen(),
+                     ),
+                   );},
                   ),
                   const SizedBox(
                     height: 10,
