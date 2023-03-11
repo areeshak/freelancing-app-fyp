@@ -1,14 +1,54 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelancing_fyp/services/firebase_auth_methods.dart';
 import 'package:freelancing_fyp/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  bool isVerified = false;
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    isVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+
+    if (!isVerified) {
+      context.read<FirebaseAuthMethods>().sendEmailVerification(context);
+      timer = Timer.periodic(
+        const Duration(seconds: 3),                                             //every 3 seconds it checks if user email is verfied
+        (_) => checkEmailVerified(),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  Future checkEmailVerified() async {
+    await FirebaseAuth.instance.currentUser!.reload();
+    setState(() {
+      isVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+    });
+
+    if (isVerified) timer?.cancel();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final user = context.read<FirebaseAuthMethods>().user; //access user
+    final user = context.watch<FirebaseAuthMethods>().user; //access user
     final check = user.providerData.first.providerId;
 
     return Scaffold(
@@ -57,9 +97,7 @@ class UserProfileScreen extends StatelessWidget {
                             ? user.displayName!
                             : "namemissing@emailuser.com",
                         style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       ),
                     ),
                     Text(
@@ -75,6 +113,22 @@ class UserProfileScreen extends StatelessWidget {
           ),
           const SizedBox(
             height: 40,
+          ),
+          !user.emailVerified
+              ? CustomButton(
+                  onTap: () {
+                    context
+                        .read<FirebaseAuthMethods>()
+                        .sendEmailVerification(context);
+                  },
+                  text: ('verify email'),
+                )
+              : const Text(
+                  "Email Verified!",
+                  style: TextStyle(fontSize: 16, color: Colors.blueGrey),
+                ),
+          const SizedBox(
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
