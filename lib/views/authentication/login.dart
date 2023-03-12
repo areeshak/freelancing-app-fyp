@@ -1,30 +1,41 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancing_fyp/views/login.dart';
-import 'package:provider/provider.dart';
+import 'package:freelancing_fyp/services/authentication/firebase_auth_methods.dart';
+import 'package:freelancing_fyp/views/authentication/signup_email_password_screen.dart';
+import 'package:freelancing_fyp/widgets/custom_button.dart';
+import 'package:freelancing_fyp/widgets/custom_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
-import '../services/firebase_auth_methods.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/custom_textfield.dart';
+import 'changePasswordScreen.dart';
 
-class EmailPasswordSignup extends StatefulWidget {
-  const EmailPasswordSignup({Key? key}) : super(key: key);
+
+
+
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<EmailPasswordSignup> createState() => _EmailPasswordSignupState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void signUpUser() async {
-    context.read<FirebaseAuthMethods>().signUpWithEmail(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-          context: context,
-        );
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void loginUser() {
+    context.read<FirebaseAuthMethods>().loginWithEmail(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+        context: context);
   }
 
   @override
@@ -38,9 +49,9 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
               height: MediaQuery.of(context).size.height * 0.27,
               child: const Center(
                 child: Text(
-                  'Welcome Back',
+                  'Hello',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 60,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -61,7 +72,7 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
                   Container(
                     padding: const EdgeInsets.all(18.0),
                     child: const Text(
-                      'Sign up',
+                      'Login',
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.w500,
@@ -79,25 +90,43 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
                     obscureText: true,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
-                  CustomButton(onTap: signUpUser, text: 'Sign up'),
+                  Align(
+                      alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 35),
+                      child: GestureDetector(
+                        child: const Text('Forgot Password?'),
+                       onTap: () {Navigator.of(context).push(
+                         MaterialPageRoute(
+                           builder: (context) =>
+                           const ChangePasswordScreen(),
+                         ),
+                       );},
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomButton(onTap: loginUser, text: 'Login'),
                   const SizedBox(
                     height: 20,
                   ),
                   RichText(
                     text: TextSpan(
-                      text: "Already have an account?  ",
+                      text: "Don't have an account? ",
                       style: const TextStyle(fontSize: 16, color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Login',
+                          text: 'Signup',
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                  const LoginScreen(),
+                                      const EmailPasswordSignup(),
                                 ),
                               );
                             },
@@ -112,15 +141,15 @@ class _EmailPasswordSignupState extends State<EmailPasswordSignup> {
                     children: const [
                       Expanded(
                           child: Divider(
-                            color: Colors.black38,
-                            thickness: 1,
-                          )),
+                        color: Colors.black38,
+                        thickness: 1,
+                      )),
                       Text("   OR   "),
                       Expanded(
                           child: Divider(
-                            color: Colors.black38,
-                            thickness: 1,
-                          )),
+                        color: Colors.black38,
+                        thickness: 1,
+                      )),
                     ],
                   ),
                   const SizedBox(

@@ -1,13 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancing_fyp/views/login.dart';
 import 'package:freelancing_fyp/views/splash.dart';
-import 'package:freelancing_fyp/views/userProfile.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
-import 'services/firebase_auth_methods.dart';
+import 'services/authentication/firebase_auth_methods.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
