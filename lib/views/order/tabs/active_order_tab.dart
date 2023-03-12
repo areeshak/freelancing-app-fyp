@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 import '../../../entities/order.dart';
+import '../../../utils/orderStatusMap.dart';
+import '../orderProgress.dart';
 
 class ActiveOrderTab extends StatelessWidget {
   ActiveOrderTab({Key? key}) : super(key: key);
@@ -49,18 +49,10 @@ class ActiveOrderTab extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  orders[index].orderStatus == "Ongoing"
-                      ? const FaIcon(
-                          FontAwesomeIcons.spinner,
-                          color: Colors.orange,
-                        )
-                      : (orders[index].orderStatus == "Delivered"
-                          ? const FaIcon(
-                              FontAwesomeIcons.circleCheck,
-                              color: Colors.green,
-                            )
-                          : const FaIcon(FontAwesomeIcons.rightLeft,
-                              color: Colors.yellow)),
+                  Icon(
+                    statusIcons[orders[index].orderStatus],
+                    color: statusColor[orders[index].orderStatus],
+                  ),
                   Text(orders[index].orderStatus),
                 ],
               ),
@@ -73,12 +65,18 @@ class ActiveOrderTab extends StatelessWidget {
                     const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
               ),
             ),
-            subtitle: Text(orders[index].delivery.isBefore(DateTime.now())
-                ? ('Delivered on ${DateFormat.yMMMd().format(orders[index].delivery)}')
-                : ('Delivery in ${orders[index].delivery.difference(DateTime.now()).inDays} day(s)'),
-            ),
+            subtitle: Text(getStatusMessage(
+                orderStatus: orders[index].orderStatus,
+                delivery: orders[index].delivery)),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        OrderProgressScreen(order: orders[index]),
+                  ),
+                );
+              },
               icon: const Icon(Icons.arrow_forward_ios),
             ),
           ),

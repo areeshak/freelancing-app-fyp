@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
+import 'package:freelancing_fyp/views/order/orderProgress.dart';
 
 import '../../../entities/order.dart';
+import '../../../utils/orderStatusMap.dart';
 
 class OrderHistoryTab extends StatefulWidget {
   const OrderHistoryTab({Key? key}) : super(key: key);
@@ -12,7 +12,6 @@ class OrderHistoryTab extends StatefulWidget {
 }
 
 class _OrderHistoryTabState extends State<OrderHistoryTab> {
-
   List<Order> orders = [
     Order(
       taskTitle: "I want to get a video for facebook page",
@@ -55,13 +54,10 @@ class _OrderHistoryTabState extends State<OrderHistoryTab> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  orders[index].orderStatus == "Accepted"
-                      ? const FaIcon(FontAwesomeIcons.solidCircleCheck,
-                color: Colors.blue) :
-                       const FaIcon(
-                         FontAwesomeIcons.solidCircleXmark, // Rejected
-                         color: Colors.red,
-                       ),
+                  Icon(
+                    statusIcons[orders[index].orderStatus],
+                    color: statusColor[orders[index].orderStatus],
+                  ),
                   Text(orders[index].orderStatus),
                 ],
               ),
@@ -71,15 +67,21 @@ class _OrderHistoryTabState extends State<OrderHistoryTab> {
               child: Text(
                 orders[index].taskTitle,
                 style:
-                const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
               ),
             ),
-            subtitle: Text(orders[index].orderStatus == "Accepted"
-                ? ('Accepted on ${DateFormat.yMMMd().format(orders[index].delivery)}')
-                : ('Rejected on ${DateFormat.yMMMd().format(orders[index].delivery)}'),
-            ),
+            subtitle: Text(getStatusMessage(
+                orderStatus: orders[index].orderStatus,
+                delivery: orders[index].delivery)),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        OrderProgressScreen(order: orders[index]),
+                  ),
+                );
+              },
               icon: const Icon(Icons.arrow_forward_ios),
             ),
           ),
