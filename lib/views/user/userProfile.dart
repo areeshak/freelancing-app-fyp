@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freelancing_fyp/services/firebase_auth_methods.dart';
+import 'package:freelancing_fyp/services/authentication/firebase_auth_methods.dart';
 import 'package:freelancing_fyp/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
