@@ -11,7 +11,7 @@ class ActiveOrderTab extends StatelessWidget {
     Order(
       taskTitle: "I want to get a video for facebook page",
       orderStatus: "Ongoing",
-      delivery: DateTime(2023, 3, 2),
+      delivery: DateTime(2023, 3, 15),
     ),
     Order(
       taskTitle: "I want to get a digital video campaign",
