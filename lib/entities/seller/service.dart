@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+
 class Service {
   String title;
   String description;
   double charges;
   int deliveryTime;
+  bool isPartTime = false;
   String samplePath;
   String category;
   String subCategory;
