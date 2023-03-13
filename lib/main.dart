@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancing_fyp/views/buyer/tasks.dart';
 import 'package:freelancing_fyp/views/order/ordersRecord.dart';
 import 'package:freelancing_fyp/views/splash.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           tabBarTheme: TabBarTheme( labelColor: Colors.black,),
         ),
-        home: const OrdersRecord(),
+        home: const Tasks(),
         //const SplashScreen(),
       ),
     );

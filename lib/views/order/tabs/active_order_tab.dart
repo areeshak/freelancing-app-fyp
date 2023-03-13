@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../entities/order.dart';
 import '../../../utils/orderStatusMap.dart';
-import '../orderProgress.dart';
+// import '../orderProgress.dart';
 
 class ActiveOrderTab extends StatelessWidget {
   ActiveOrderTab({Key? key}) : super(key: key);
@@ -70,12 +70,12 @@ class ActiveOrderTab extends StatelessWidget {
                 delivery: orders[index].delivery)),
             trailing: IconButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        OrderProgressScreen(order: orders[index]),
-                  ),
-                );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //         OrderProgressScreen(order: orders[index]),
+                //   ),
+                // );
               },
               icon: const Icon(Icons.arrow_forward_ios),
             ),
