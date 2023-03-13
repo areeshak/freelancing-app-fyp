@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelancing_fyp/views/buyer/active_tasks.dart';
 
 class Tasks extends StatefulWidget {
   const Tasks({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _TasksState extends State<Tasks> {
         ),
         body: TabBarView(
           children: [
-            Center(child: Text('Active tasks')),
+            Center(child: ActiveTasks()),
             Center(child: Text('History of tasks')),
           ],
         ),
